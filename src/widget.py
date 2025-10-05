@@ -20,3 +20,9 @@ def mask_account_card(type_card_number: str) -> str:
     else:
         result_number += get_mask_card_number(''.join(new_list_number))
     return f'{' '.join(new_list_alpha)} {result_number}'
+
+
+def get_date(date_item: str) -> str:
+    """Функция, которая возвращает дату в формате 'ДД.ММ.ГГГГ'"""
+
+    return f'"{date_item[8:10]}.{date_item[5:7]}.{date_item[0:4]}"'
