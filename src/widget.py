@@ -24,6 +24,3 @@ def get_date(date_item: str) -> str:
     """Функция, которая возвращает дату в формате 'ДД.ММ.ГГГГ'"""
 
     return f'"{date_item[8:10]}.{date_item[5:7]}.{date_item[0:4]}"'
-
-if __name__ == '__main__':
-    print(mask_account_card("Visa Classic 6831982476737658"))
