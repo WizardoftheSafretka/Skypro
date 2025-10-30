@@ -4,17 +4,17 @@ from src.masks import get_mask_account
 
 @pytest.fixture
 def card_numbers_normal():
-    return 7000792289606361
+    return "7000792289606361"
 
 
 @pytest.fixture
 def card_numbers_unnormal_min():
-    return 7000792280
+    return "7000792280"
 
 
 @pytest.fixture
 def card_numbers_unnormal_max():
-    return 7000792280345345435
+    return "7000792280345345435"
 
 @pytest.fixture
 def card_numbers_zero():
@@ -22,17 +22,17 @@ def card_numbers_zero():
 
 @pytest.fixture
 def get_mask_account_normal():
-    return 73654108430135874305
+    return "73654108430135874305"
 
 
 @pytest.fixture
 def get_mask_account_unnormal():
-    return 736541084301358743053452622524
+    return "736541084301358743053452622524"
 
 
 @pytest.fixture
 def get_mask_account_min():
-    return 7365410
+    return "7365410"
 
 
 def test_get_mask_card_number_normal(card_numbers_normal):
