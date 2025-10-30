@@ -13,10 +13,12 @@ def get_mask_card_number(card_number: int) -> str:
     return mask_number
 
 
-def get_mask_account(account: str) -> str:
+def get_mask_account(account: int) -> str:
     """Принять номер счета и вернуть его маску"""
 
-    return f"**{account[-4:]}"
+    mask_account_str = str(account)
+
+    return f"**{mask_account_str[-4:]}"
 
 if __name__ == "__main__":
     print(get_mask_card_number(''))
