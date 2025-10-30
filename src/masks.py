@@ -1,10 +1,22 @@
-def get_mask_card_number(card_number: str) -> str:
+def get_mask_card_number(card_number: int) -> str:
     """Принять номер карты и вернуть его маску"""
 
-    return f"{card_number[0:4]} {card_number[4:6]}** **** {card_number[-4:]}"
+    card_number_str = str(card_number)
+    if str(card_number) == "":
+        return ""
+    part_1 = card_number_str[:6]
+    part_2 = "******"
+    part_3 = card_number_str[-4:]
+
+    mask_number = f"{part_1[:4]} {part_1[4:]}{part_2[:2]} {part_2[2:]} {part_3[:2]}{part_3[2:]}"
+
+    return mask_number
 
 
 def get_mask_account(account: str) -> str:
     """Принять номер счета и вернуть его маску"""
 
     return f"**{account[-4:]}"
+
+if __name__ == "__main__":
+    print(get_mask_card_number(''))
