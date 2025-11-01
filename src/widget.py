@@ -9,8 +9,6 @@ def mask_account_card(type_card_number: str) -> str:
     new_list_number = []
     result_number = ""
 
-    if len(type_card_number) == 0:
-        return ""
     for i in type_card_number_list:
         if i.isalpha():
             new_list_alpha.append(i)
@@ -20,13 +18,13 @@ def mask_account_card(type_card_number: str) -> str:
         result_number += get_mask_account("".join(new_list_number))
     else:
         result_number += get_mask_card_number("".join(new_list_number))
-    return f"{' '.join(new_list_alpha)} {result_number}"
+    final_alpha = ' '.join(new_list_alpha)
+    final_result = final_alpha + " " + result_number
+    return final_result
 
 
 def get_date(date_item: str) -> str:
     """Функция, которая возвращает дату в формате 'ДД.ММ.ГГГГ'"""
-    if len(date_item) == 0:
-        return ""
-    if "T" not in date_item and len(date_item) > 0:
+    if "T" not in date_item:
         raise ValueError("Неверный формат даты")
     return f'{date_item[8:10]}.{date_item[5:7]}.{date_item[0:4]}'

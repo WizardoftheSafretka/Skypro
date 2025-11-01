@@ -2,60 +2,41 @@ import pytest
 from src.widget import mask_account_card
 from src.widget import get_date
 
+def test_mask_card():
+    assert mask_account_card("Visa Electron 1234567890121234") == "Visa Electron 1234 56** **** 1234"
 
-@pytest.fixture
-def mask_card():
-    return "Visa Platinum 7000792289606361"
+def test_mask_account():
+    assert mask_account_card("Счет 12345678901212341234") == "Счет **1234"
 
-@pytest.fixture
-def mask_account():
-    return "Счет 73654108430135874305"
+def test_mask_card_wrong_number():
+    with pytest.raises(ValueError) as exc_info:
+        mask_account_card("Visa 123")
+    assert str(exc_info.value) == "Неверный формат номера карты. Номер карты должен состоять из 16 цифр"
 
+def test_get_mask_card_number_empty_number():
+    with pytest.raises(ValueError) as exc_info:
+        mask_account_card("Visa")
+    assert str(exc_info.value) == "Неверный формат номера карты. Номер карты должен состоять из 16 цифр"
 
-@pytest.fixture
-def mask_account_card_zero():
-    return ""
+def test_get_mask_account_wrong_number():
+    with pytest.raises(ValueError) as exc_info:
+        mask_account_card("Счет 123")
+    assert str(exc_info.value) == "Неверный формат номера счета. Номер счета должен состоять из 20 цифр"
 
-@pytest.fixture
-def get_date_right():
-    return "2024-03-11T02:26:18.671407"
+def test_get_mask_account_empty_number():
+    with pytest.raises(ValueError) as exc_info:
+        mask_account_card("Счет 123")
+    assert str(exc_info.value) == "Неверный формат номера счета. Номер счета должен состоять из 20 цифр"
 
-
-@pytest.fixture
-def get_date_wrong():
-    return "05.11.2025"
-
-@pytest.fixture
-def get_date_zero():
-    return ""
-
-def test_mask_card(mask_card):
-    assert mask_account_card(mask_card) == "Visa Platinum 7000 79** **** 6361"
-
-
-def test_mask_account(mask_account):
-    assert mask_account_card(mask_account) == "Счет **4305"
-
-def test_mask_account_zero(mask_account_card_zero):
-        assert mask_account_card(mask_account_card_zero) == ""
-
-
-@pytest.mark.parametrize("x, expected", [("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"),
-                                         ("Счет 64686473678894779589", "Счет **9589"),
-                                         ("Visa Classic 6831982476737658", "Visa Classic 6831 98** **** 7658")])
-def test_mask_account_card(x, expected):
-    assert mask_account_card(x) == expected
-
-
-def test_get_date_right(get_date_right):
-    assert get_date(get_date_right) == "11.03.2024"
-
+def test_get_date_right():
+    assert get_date("2024-03-11T02:26:18.671407") == "11.03.2024"
 
 def test_get_date_wrong():
     with pytest.raises(ValueError) as exc_info:
-        get_date("05.11.2025")
+        get_date("22.22.22")
     assert str(exc_info.value) == "Неверный формат даты"
 
-
-def test_get_date_zero(get_date_zero):
-    assert get_date(get_date_zero) == ""
+def test_get_date_empty():
+    with pytest.raises(ValueError) as exc_info:
+        get_date("")
+    assert str(exc_info.value) == "Неверный формат даты"
