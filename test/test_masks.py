@@ -2,65 +2,52 @@ import pytest
 from src.masks import get_mask_card_number
 from src.masks import get_mask_account
 
-@pytest.fixture
-def card_numbers_normal():
-    return "7000792289606361"
-
-
-@pytest.fixture
-def card_numbers_unnormal_min():
-    return "7000792280"
-
-
-@pytest.fixture
-def card_numbers_unnormal_max():
-    return "7000792280345345435"
-
-@pytest.fixture
-def card_numbers_zero():
+@pytest.fixture()
+def empty_number():
     return ""
 
-@pytest.fixture
-def get_mask_account_normal():
-    return "73654108430135874305"
+@pytest.fixture()
+def big_number():
+    return 295295918471984782197489217414215
 
+@pytest.fixture()
+def small_number():
+    return 295
 
-@pytest.fixture
-def get_mask_account_unnormal():
-    return "736541084301358743053452622524"
+def test_get_mask_card_number():
+    assert get_mask_card_number(1234567890121234) == "1234 56** **** 1234"
 
+def test_get_mask_card_number_big_number():
+    with pytest.raises(ValueError) as exc_info:
+        get_mask_card_number(big_number)
+    assert str(exc_info.value) == "Номер карты должен состоять из 16 цифр"
 
-@pytest.fixture
-def get_mask_account_min():
-    return "7365410"
+def test_get_mask_card_number_small_number():
+    with pytest.raises(ValueError) as exc_info:
+        get_mask_card_number(small_number)
+    assert str(exc_info.value) == "Номер карты должен состоять из 16 цифр"
 
+def test_get_mask_card_number_empty_number():
+    with pytest.raises(ValueError) as exc_info:
+        get_mask_card_number(empty_number)
+    assert str(exc_info.value) == "Номер карты должен состоять из 16 цифр"
 
-def test_get_mask_card_number_normal(card_numbers_normal):
-    assert get_mask_card_number(card_numbers_normal) == "7000 79** **** 6361"
+def test_get_mask_account():
+    assert get_mask_account(12345678901256785678) == "**5678"
 
+def test_get_mask_account_big_number():
+    with pytest.raises(ValueError) as exc_info:
+        get_mask_account(big_number)
+    assert str(exc_info.value) == "Номер счета должен состоять из 20 цифр"
 
-def test_card_numbers_unnormal_min(card_numbers_unnormal_min):
-        assert get_mask_card_number(card_numbers_unnormal_min) == "7000 79** **** 2280"
+def test_get_mask_account_small_number():
+    with pytest.raises(ValueError) as exc_info:
+        get_mask_account(small_number)
+    assert str(exc_info.value) == "Номер счета должен состоять из 20 цифр"
 
-
-def test_get_card_numbers_unnormal_max(card_numbers_unnormal_max):
-    assert get_mask_card_number(card_numbers_unnormal_max) == "7000 79** **** 5435"
-
-
-def test_get_card_numbers_zero(card_numbers_zero):
-    assert get_mask_card_number(card_numbers_zero) == ""
-
-
-def test_get_mask_account_normal(get_mask_account_normal):
-    assert get_mask_account(get_mask_account_normal) == "**4305"
-
-
-def test_get_mask_account_unnormal(get_mask_account_unnormal):
-    assert get_mask_account(get_mask_account_unnormal) == "**2524"
-
-
-def test_get_mask_account_min(get_mask_account_min):
-    assert get_mask_account(get_mask_account_min) == "**5410"
-
+def test_get_mask_account_empty_number():
+    with pytest.raises(ValueError) as exc_info:
+        get_mask_account(empty_number)
+    assert str(exc_info.value) == "Номер счета должен состоять из 20 цифр"
 
 
