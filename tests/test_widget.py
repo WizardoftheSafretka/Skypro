@@ -1,6 +1,7 @@
 import pytest
-from src.widget import mask_account_card
-from src.widget import get_date
+
+from src.widget import get_date, mask_account_card
+
 
 def test_mask_card():
     assert mask_account_card("Visa Electron 1234567890121234") == "Visa Electron 1234 56** **** 1234"
