@@ -18,7 +18,7 @@ def mask_account_card(type_card_number: str) -> str:
         result_number += get_mask_account("".join(new_list_number))
     else:
         result_number += get_mask_card_number("".join(new_list_number))
-    final_alpha = ' '.join(new_list_alpha)
+    final_alpha = " ".join(new_list_alpha)
     final_result = final_alpha + " " + result_number
     return final_result
 
@@ -27,4 +27,4 @@ def get_date(date_item: str) -> str:
     """Функция, которая возвращает дату в формате 'ДД.ММ.ГГГГ'"""
     if "T" not in date_item:
         raise ValueError("Неверный формат даты")
-    return f'{date_item[8:10]}.{date_item[5:7]}.{date_item[0:4]}'
+    return f"{date_item[8:10]}.{date_item[5:7]}.{date_item[0:4]}"

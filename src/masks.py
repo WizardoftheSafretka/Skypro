@@ -1,4 +1,4 @@
-def get_mask_card_number(card_number: int) -> str:
+def get_mask_card_number(card_number: str) -> str:
     """Принять номер карты и вернуть его маску"""
     str_card_number = str(card_number)
     if len(str_card_number) != 16:
@@ -11,13 +11,10 @@ def get_mask_card_number(card_number: int) -> str:
         return mask_number
 
 
-
-def get_mask_account(account: int) -> str:
+def get_mask_account(account: str) -> str:
     """Принять номер счета и вернуть его маску"""
     str_account = str(account)
     if len(str_account) != 20:
         raise ValueError("Неверный формат номера счета. Номер счета должен состоять из 20 цифр")
     else:
         return f"**{str_account[-4:]}"
-if __name__ == "__main__":
-    print(get_mask_card_number(123))
