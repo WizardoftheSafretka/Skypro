@@ -14,3 +14,22 @@ def transaction_descriptions(transactions: list) -> iter:
     for transaction in transactions:
         if 'description' in transaction:
             yield transaction['description']
+
+def card_number_generator(start: int, stop: int) -> iter:
+    """Генератор, который выдает номера банковских карт в формате XXXX XXXX XXXX XXXX"""
+
+
+    for n in range(start, stop+1):
+        str_n = str(n)
+        while len(str_n) < 16:
+            str_n = "0" + str_n
+        card_number = f"{str_n[:4]} {str_n[4:8]} {str_n[8:12]} {str_n[12:]}"
+        yield card_number
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 import pytest
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 @pytest.fixture()
 def transactions_currency():
@@ -24,4 +24,14 @@ def test_transaction_descriptions(transactions_currency):
     assert (next(expected_result)) == "Перевод со счета на счет"
     assert (next(expected_result)) == "Перевод со карты на карту"
     assert (next(expected_result)) == "Перевод со счета на счет"
+
+@pytest.mark.parametrize("start, stop, first, second", [
+    (1, 3, "0000 0000 0000 0001", "0000 0000 0000 0002"),
+    (99, 101, "0000 0000 0000 0099", "0000 0000 0000 0100"),
+    (999, 1001, "0000 0000 0000 0999", "0000 0000 0000 1000"),
+])
+def test_card_number_generator(start, stop, first, second):
+    gen = card_number_generator(start, stop)
+    assert next(gen) == first
+    assert next(gen) == second
 
