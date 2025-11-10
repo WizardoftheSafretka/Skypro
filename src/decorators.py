@@ -5,7 +5,7 @@ def log(filename: str | None = None) -> Callable:
         def wrapper(*args, **kwargs) -> Any:
             try:
                 result = func(*args, **kwargs)
-                massage = f"Функция {func.__name__}выполнена!"
+                massage = f"Функция {func.__name__} выполнена!"
                 if filename:
                     with open(filename, "a", encoding="utf-8") as f:
                         f.write(massage + "\n")
@@ -13,11 +13,13 @@ def log(filename: str | None = None) -> Callable:
                     print(massage)
                 return result
             except Exception as e:
-                massage = (f"Функция {func.__name__} невыполнена! Произошла ошибка {type(e).__name__}: {e}", f"входные параметры: {args, kwargs}.")
+                msg = (f"Функция {func.__name__} не выполнена! Произошла ошибка {type(e).__name__}: {e},"
+                       f"входные параметры: {args, kwargs}.")
                 if filename:
                     with open(filename, "a", encoding="utf-8") as f:
-                        f.write(massage + "\n")
+                        f.write(msg + "\n")
                 else:
                      print(massage)
+                raise
         return wrapper
     return decorator
