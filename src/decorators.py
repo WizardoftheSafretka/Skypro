@@ -2,6 +2,8 @@ from typing import Any, Callable
 
 
 def log(filename: str | None = None) -> Callable:
+    """Декоратор логирования"""
+
     def decorator(func: Callable) -> Any:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
