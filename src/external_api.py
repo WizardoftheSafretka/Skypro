@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 def conversation(transaction: dict) -> float | str:
     """Функция, которая принимает на вход транзакцию и возвращает сумму транзакции"""
 
-    if transaction["operationAmount"]["currency"]["name"] == "руб.":
+    if transaction["operationAmount"]["currency"]["code"] == "RUB":
         return float(transaction["operationAmount"]["amount"])
     else:
         load_dotenv()

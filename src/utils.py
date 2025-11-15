@@ -10,6 +10,6 @@ def get_list_dict_about_trans_json(file_name: str) -> Any:
             data = json.load(f)
         result = data
         return result
-    except FileNotFoundError:
+    except FileNotFoundError or json.JSONDecodeError:
         print("Нет возможности открыть файл")
         return []
