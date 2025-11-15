@@ -12,10 +12,10 @@ def conversation(transaction:dict) -> float:
         load_dotenv()
         code = transaction["operationAmount"]["currency"]["code"]
         amount = float(transaction["operationAmount"]["amount"])
-        url = f"https://api.apilayer.com/exchangerates_data/convert?to={'RUB'}&from={code}&amount={amount}"
+        url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={code}&amount={amount}"
         headers = {"apikey": os.getenv('API_KEY')}
         payload = {}
-        response = requests.request("GET", url, headers=headers, data = payload)
+        response = requests.get(url, headers=headers, data = payload)
         status_code = response.status_code
         if status_code == 200:
             result = response.json()
