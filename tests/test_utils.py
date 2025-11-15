@@ -1,19 +1,20 @@
-import pytest
-import json
-import pathlib
+from unittest.mock import patch, mock_open
 from src.utils import get_list_dict_about_trans_json
 
 
-def test_get_list_dict_about_trans_json_with_tmp(tmp_path: pathlib.Path):
-    test_file = tmp_path / "test_file_json"
-    data = [{"key": "value", "number": 123}, {"key": "value", "number": 1234}]
-    with open(test_file, 'w', encoding='utf-8') as f:
-        json.dump(data, f)
-    assert get_list_dict_about_trans_json(test_file) == data
+@patch("builtins.open", new_callable=mock_open())
+@patch("json.load")
+def test_get_list_dict_about_trans_json(mock_load, new_callable):
+        mock_load.return_value = {"key": "value"}
+        result = get_list_dict_about_trans_json("test_data")
+        expected = {"key": "value"}
+        assert result == expected
 
-def test_get_list_dict_about_trans_json_with_wrong_format(tmp_path: pathlib.Path):
-    test_file = tmp_path / "test_file_json"
-    data = []
-    with open(test_file, 'w', encoding='utf-8') as f:
-        json.dump(data, f)
-    assert get_list_dict_about_trans_json(test_file) == []
+@patch("builtins.open", new_callable=mock_open())
+@patch("json.load")
+def test_get_list_dict_about_trans_json_with_empty(mock_load, new_callable):
+        mock_load.return_value = {}
+        result = get_list_dict_about_trans_json("test_data")
+        expected = {}
+        assert result == expected
+

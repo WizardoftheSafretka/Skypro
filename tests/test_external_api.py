@@ -46,3 +46,12 @@ def test_conversation_usd(mock_get):
     result = conversation(transaction_usd)
     assert result == 664694.82125
     mock_get.assert_called_once_with(f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={transaction_usd['operationAmount']['currency']['code']}&amount={transaction_usd['operationAmount']['amount']}", headers={'apikey': os.getenv('API_KEY')}, data={})
+
+@patch('requests.get')
+def test_conversation_usd(mock_get):
+    load_dotenv()
+    mock_get.return_value.status_code = 500
+    mock_get.return_value.json.return_value = {"result": 664694.82125}
+    result = conversation(transaction_usd)
+    assert "Запрос не был успешным. Возможная причина:" in result
+    mock_get.assert_called_once_with(f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={transaction_usd['operationAmount']['currency']['code']}&amount={transaction_usd['operationAmount']['amount']}", headers={'apikey': os.getenv('API_KEY')}, data={})
