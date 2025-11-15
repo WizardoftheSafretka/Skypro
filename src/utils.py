@@ -9,4 +9,3 @@ def get_list_dict_about_trans_json(file_name:str) -> list[dict]:
     except FileNotFoundError:
         print("Нет возможности открыть файл")
         return []
-
