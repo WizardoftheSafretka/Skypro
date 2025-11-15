@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import patch, mock_open
 from src.utils import get_list_dict_about_trans_json
 
