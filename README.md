@@ -32,6 +32,8 @@ pip install -r requirements.txt
 6. Используйте функцию transaction_descriptions для получения описаний транзакций
 7. Используйте функцию card_number_generator для генераций номера карт
 8. Используйте декоратор log для логирования
+9. Используйте функцию get_list_dict_about_trans_json для открытия json файлов
+10. Используйте функцию conversation для конвертации валют
 
 ## Автор:
 
