@@ -21,6 +21,6 @@ def get_list_dict_about_trans_json(file_name: str) -> Any:
         logger.info(f"Данные загружены")
         return result
     except FileNotFoundError or json.JSONDecodeError as ex:
-        logger.error(f'Данные невозвожно загрузить. Тип ошибки: {ex}')
+        logger.error(f'Данные невозможно загрузить. Тип ошибки: {ex}')
         print("Нет возможности открыть файл")
         return []
