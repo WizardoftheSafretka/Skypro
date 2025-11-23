@@ -1,10 +1,11 @@
 import pandas as pd
+from black.linegen import delimiter_split
 
 
 def read_transactions_csv(filename: str) -> list[dict]:
     """Считывание файла csv"""
 
-    read_csv = pd.read_csv(filename)
+    read_csv = pd.read_csv(filename, delimiter = ";")
     return read_csv.to_dict(orient="records")
 
 
