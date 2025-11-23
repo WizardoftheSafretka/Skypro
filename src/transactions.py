@@ -1,13 +1,11 @@
-from typing import Any, Hashable
-
 import pandas as pd
 
 
-def read_transactions_csv(filename: str) -> dict[Hashable, Any]:
+def read_transactions_csv(filename: str) -> list[dict]:
     """Считывание файла csv"""
 
     read_csv = pd.read_csv(filename)
-    return read_csv.to_dict()
+    return read_csv.to_dict(orient="records")
 
 
 def read_transactions_excel(filename: str) -> list[dict]:
