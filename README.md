@@ -34,6 +34,8 @@ pip install -r requirements.txt
 8. Используйте декоратор log для логирования
 9. Используйте функцию get_list_dict_about_trans_json для открытия json файлов
 10. Используйте функцию conversation для конвертации валют
+11. Используйте функцию read_transactions_csv для считывания файла csv
+12. Используйте функцию read_transactions_excel для считывания файла excel
 
 ## Автор:
 
