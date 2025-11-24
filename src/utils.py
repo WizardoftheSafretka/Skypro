@@ -1,12 +1,15 @@
 import json
 import logging
+from pathlib import Path
 from typing import Any
 
-logger = logging.getLogger(__name__)
+Path("logs").mkdir(exist_ok=True)
+logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
-file_handler = logging.FileHandler("../logs/utils.log", mode="w", encoding="utf-8")
-file_formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
-file_handler.setFormatter(file_formatter)
+file_handler = logging.FileHandler("logs/utils.log", encoding="utf-8")
+file_handler.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(massage)s", datefmt="%y-%m-%d %H:%M:%S")
+file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 
