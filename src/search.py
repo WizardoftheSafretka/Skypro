@@ -3,9 +3,7 @@ from collections import Counter
 
 
 def process_bank_search(operations_list: list[dict], keyword: str) -> list[dict]:
-    """Функция, которая будет принимать список словарей с данными
-    о банковских операциях и строку поиска, а возвращать список словарей,
-    у которых в описании есть данная строка"""
+    """Функция поиска операций по кючевому слову"""
 
     chosen_operations = []
     for operation in operations_list:
@@ -19,10 +17,7 @@ def process_bank_search(operations_list: list[dict], keyword: str) -> list[dict]
 
 
 def process_bank_operations(data: list[dict], categories: list) -> dict:
-    """Функция, которая будет принимать список словарей с данными о банковских операциях
-    и список категорий операций,
-    а возвращать словарь, в котором ключи — это названия категорий,
-     а значения — это количество операций в каждой категории"""
+    """Функция возврата словаря с подсчетом категорий"""
 
     categories_counter = Counter()
     for operation in data:
