@@ -36,7 +36,8 @@ pip install -r requirements.txt
 10. Используйте функцию conversation для конвертации валют
 11. Используйте функцию read_transactions_csv для считывания файла csv
 12. Используйте функцию read_transactions_excel для считывания файла excel
-
+13. Используйте функцию process_bank_search для поиска операций по ключевому слову
+14. Используйте функцию process_bank_operations для подсчета категорий
 ## Автор:
 
 Ерихов Максим aka Wizard
